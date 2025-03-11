@@ -1,5 +1,5 @@
 {
-    "name": "@gk/signing-request",
+    "name": "signing-request-gk",
     "version": "1.0.0",
     "description": "EOSIO Signing Request (ESR / EEP-7) encoder and decoder",
     "homepage": "https://github.com/greymass/eosio-signing-request",
