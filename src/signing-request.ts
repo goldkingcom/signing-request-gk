@@ -33,7 +33,7 @@ import {
     UInt32Type,
     UInt8,
     VarUInt,
-} from '@wharfkit/antelope'
+} from 'eosjs-core-gk'
 
 import * as base64u from './base64u'
 import {ChainAlias, ChainId, ChainIdType, ChainIdVariant, ChainName} from './chain-id'
@@ -537,8 +537,10 @@ export class SigningRequest {
         if (typeof uri !== 'string') {
             throw new Error('Invalid request uri')
         }
-        const [, path] = uri.split(':')
-
+        const [scheme, path] = uri.split(':')
+        if (scheme !== 'esr' && scheme !== 'web+esr') {
+            throw new Error('Invalid scheme')
+        }
         const data = base64u.decode(path.startsWith('//') ? path.slice(2) : path)
         return SigningRequest.fromData(data, options)
     }
@@ -653,7 +655,7 @@ export class SigningRequest {
      *                   Defaults to true.
      * @returns An esr uri string.
      */
-    public encode(compress?: boolean, slashes?: boolean, scheme: string = 'esr:'): string {
+    public encode(compress?: boolean, slashes?: boolean): string {
         const shouldCompress = compress !== undefined ? compress : this.zlib !== undefined
         if (shouldCompress && this.zlib === undefined) {
             throw new Error('Need zlib to compress')
@@ -674,6 +676,7 @@ export class SigningRequest {
         const out = new Uint8Array(1 + array.byteLength)
         out[0] = header
         out.set(array, 1)
+        let scheme = 'esr:'
         if (slashes !== false) {
             scheme += '//'
         }
@@ -936,16 +939,14 @@ export class SigningRequest {
                         data = Serializer.encode({object: id})
                         authorization = [id.permission]
                     }
-                    const action = Action.from({
-                        account: '',
-                        name: 'identity',
-                        authorization,
-                        data,
-                    })
-                    // TODO: The way payloads are encoded is including the ABI, which isn't what we want
-                    // This needs to be resolved in wharfkit/antelope, and then the delete call here should be removed
-                    delete action.abi
-                    return [action]
+                    return [
+                        Action.from({
+                            account: '',
+                            name: 'identity',
+                            authorization,
+                            data,
+                        }),
+                    ]
                 } else {
                     // eslint-disable-next-line prefer-const
                     let {scope, permission} = req.value as IdentityV3
@@ -953,16 +954,14 @@ export class SigningRequest {
                         permission = PlaceholderAuth
                     }
                     const data = Serializer.encode({object: {scope, permission}, type: IdentityV3})
-                    const action = Action.from({
-                        account: '',
-                        name: 'identity',
-                        authorization: [permission],
-                        data,
-                    })
-                    // TODO: The way payloads are encoded is including the ABI, which isn't what we want
-                    // This needs to be resolved in wharfkit/antelope, and then the delete call here should be removed
-                    delete action.abi
-                    return [action]
+                    return [
+                        Action.from({
+                            account: '',
+                            name: 'identity',
+                            authorization: [permission],
+                            data,
+                        }),
+                    ]
                 }
             }
             case 'transaction':
@@ -1250,11 +1249,7 @@ function encodeAction(action: AnyAction, abis: Record<string, ABIDef>): Action {
     if (!abi) {
         throw new Error(`Missing ABI for ${action.account}`)
     }
-    const data = Action.from(action, abi)
-    // TODO: The way payloads are encoded is including the ABI, which isn't what we want
-    // This needs to be resolved in wharfkit/antelope, and then the delete call here should be removed
-    delete data.abi
-    return data
+    return Action.from(action, abi)
 }
 
 function isIdentity(action: AnyAction) {

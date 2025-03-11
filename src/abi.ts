@@ -11,7 +11,7 @@ import {
     TypeAlias,
     UInt8,
     Variant,
-} from '@wharfkit/antelope'
+} from 'eosjs-core-gk'
 
 import {ChainIdVariant} from './chain-id'
 

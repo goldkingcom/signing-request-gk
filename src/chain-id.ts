@@ -5,7 +5,7 @@ import {
     TypeAlias,
     UInt8,
     Variant,
-} from '@wharfkit/antelope'
+} from 'eosjs-core-gk'
 
 /** Chain ID aliases. */
 export enum ChainName {

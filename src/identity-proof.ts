@@ -15,7 +15,7 @@ import {
     TimePointSec,
     TimePointType,
     Transaction,
-} from '@wharfkit/antelope'
+} from 'eosjs-core-gk'
 
 import {IdentityV3} from './abi'
 import {ChainId, ChainIdType} from './chain-id'

@@ -1,12 +1,12 @@
 {
     "name": "@gk/signing-request",
     "version": "1.0.0",
-    "description": "Signing Request (ESR / EEP-7) encoder and decoder for Antelope blockchains",
+    "description": "EOSIO Signing Request (ESR / EEP-7) encoder and decoder",
     "homepage": "https://github.com/greymass/eosio-signing-request",
     "license": "MIT",
-    "main": "lib/signing-request.js",
-    "module": "lib/signing-request.m.js",
-    "types": "lib/signing-request.d.ts",
+    "main": "lib/esr.js",
+    "module": "lib/esr.m.js",
+    "types": "lib/esr.d.ts",
     "sideEffects": false,
     "files": [
         "src/*",
@@ -16,7 +16,7 @@
         "prepare": "make"
     },
     "dependencies": {
-        "@wharfkit/antelope": "^1.0.7",
+        "eosjs-core-gk": "^1.0.0",
         "tslib": "^2.0.3"
     },
     "devDependencies": {

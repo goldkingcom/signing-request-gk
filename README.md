@@ -59,8 +59,8 @@ const actions = [{
     account: 'eosio',
     name: 'voteproducer',
     authorization: [{
-      actor: '............1',
-      permission: '............2'
+        actor: '............1',
+        permission: '............2'
     }],
     data: {
         voter: '............1',
@@ -112,7 +112,7 @@ console.log(request)
 (ES6)
 ```js
 SigningRequest.create({ actions }, opts).then((request) => {
-  console.log(request)
+    console.log(request)
 })
 ```
 
@@ -120,22 +120,22 @@ This call will return an instance of a `SigningRequest`
 
 ```js
 SigningRequest {
-  version: 2,
-  data: {
-    req: [
-      'action',
-      {
-        account: 'eosio',
-        name: 'voteproducer',
-        authorization: [ { actor: '............1', permission: '............2' } ],
-        data: '0100000000000000A032DD181BE9D56500'
-      }
-    ],
-    chain_id: [ 'chain_alias', 1 ],
-    flags: 1,
-    callback: '',
-    info: []
-  }
+    version: 2,
+        data: {
+        req: [
+            'action',
+            {
+                account: 'eosio',
+                name: 'voteproducer',
+                authorization: [ { actor: '............1', permission: '............2' } ],
+                data: '0100000000000000A032DD181BE9D56500'
+            }
+        ],
+            chain_id: [ 'chain_alias', 1 ],
+            flags: 1,
+            callback: '',
+            info: []
+    }
 }
 ```
 
@@ -185,32 +185,32 @@ Decoding the signing request will return the same instance as when it was origin
 
 ```js
 SigningRequest {
-  version: 2,
-  data: {
-    chain_id: [ 'chain_alias', 1 ],
-    req: [
-      'action[]',
-      [
-        {
-          account: 'eosio',
-          name: 'voteproducer',
-          authorization: [ { actor: '............1', permission: '............2' } ],
-          data: '0100000000000000A032DD181BE9D56500'
-        }
-      ]
-    ],
-    flags: 1,
-    callback: '',
-    info: []
-  },
-  textEncoder: TextEncoder { encoding: 'utf-8' },
-  textDecoder: TextDecoder { encoding: 'utf-8', fatal: false, ignoreBOM: false },
-  zlib: {
-    deflateRaw: [Function: deflateRaw],
-    inflateRaw: [Function: inflateRaw]
-  },
-  abiProvider: { getAbi: [AsyncFunction: getAbi] },
-  signature: undefined
+    version: 2,
+        data: {
+        chain_id: [ 'chain_alias', 1 ],
+            req: [
+            'action[]',
+            [
+                {
+                    account: 'eosio',
+                    name: 'voteproducer',
+                    authorization: [ { actor: '............1', permission: '............2' } ],
+                    data: '0100000000000000A032DD181BE9D56500'
+                }
+            ]
+        ],
+            flags: 1,
+            callback: '',
+            info: []
+    },
+    textEncoder: TextEncoder { encoding: 'utf-8' },
+    textDecoder: TextDecoder { encoding: 'utf-8', fatal: false, ignoreBOM: false },
+    zlib: {
+        deflateRaw: [Function: deflateRaw],
+        inflateRaw: [Function: inflateRaw]
+    },
+    abiProvider: { getAbi: [AsyncFunction: getAbi] },
+    signature: undefined
 }
 ```
 
@@ -261,61 +261,61 @@ Below is the representation of an instance of this object.
 
 ```js
 ResolvedSigningRequest {
-  request: SigningRequest {
-    version: 2,
-    data: {
-      chain_id: [ 'chain_alias', 1 ],
-      req: [
-        'action[]',
-        [
-          {
-            account: 'eosio',
-            name: 'voteproducer',
-            authorization: [ { actor: '............1', permission: '............2' } ],
-            data: '0100000000000000A032DD181BE9D56500'
-          }
+    request: SigningRequest {
+        version: 2,
+            data: {
+            chain_id: [ 'chain_alias', 1 ],
+                req: [
+                'action[]',
+                [
+                    {
+                        account: 'eosio',
+                        name: 'voteproducer',
+                        authorization: [ { actor: '............1', permission: '............2' } ],
+                        data: '0100000000000000A032DD181BE9D56500'
+                    }
+                ]
+            ],
+                flags: 1,
+                callback: '',
+                info: []
+        },
+        textEncoder: TextEncoder { encoding: 'utf-8' },
+        textDecoder: TextDecoder { encoding: 'utf-8', fatal: false, ignoreBOM: false },
+        zlib: {
+            deflateRaw: [Function: deflateRaw],
+            inflateRaw: [Function: inflateRaw]
+        },
+        abiProvider: { getAbi: [AsyncFunction: getAbi] },
+        signature: undefined
+    },
+    signer: { actor: 'teamgreymass', permission: 'active' },
+    transaction: {
+        actions: [
+            {
+                account: 'eosio',
+                name: 'voteproducer',
+                authorization: [ { actor: 'teamgreymass', permission: 'active' } ],
+                data: { voter: 'teamgreymass', proxy: 'greymassvote', producers: [] }
+            }
+        ],
+            context_free_actions: [],
+            transaction_extensions: [],
+            expiration: '2020-01-08T18:44:57.000',
+            ref_block_num: 1423,
+            ref_block_prefix: 4278398322,
+            max_cpu_usage_ms: 0,
+            max_net_usage_words: 0,
+            delay_sec: 0
+    },
+    serializedTransaction: Uint8Array [
+        41,  35,  22,  94, 143,  5, 114,  45,   3, 255,   0,   0,
+            0,   0,   1,   0,   0,  0,   0,   0, 234,  48,  85, 112,
+            21, 210, 137, 222, 170, 50, 221,   1, 128, 177, 145,  94,
+            93,  38, 141, 202,   0,  0,   0,   0, 168, 237,  50,  50,
+            17, 128, 177, 145,  94, 93,  38, 141, 202, 160,  50, 221,
+            24,  27, 233, 213, 101,  0,   0
         ]
-      ],
-      flags: 1,
-      callback: '',
-      info: []
-    },
-    textEncoder: TextEncoder { encoding: 'utf-8' },
-    textDecoder: TextDecoder { encoding: 'utf-8', fatal: false, ignoreBOM: false },
-    zlib: {
-      deflateRaw: [Function: deflateRaw],
-      inflateRaw: [Function: inflateRaw]
-    },
-    abiProvider: { getAbi: [AsyncFunction: getAbi] },
-    signature: undefined
-  },
-  signer: { actor: 'teamgreymass', permission: 'active' },
-  transaction: {
-    actions: [
-      {
-        account: 'eosio',
-        name: 'voteproducer',
-        authorization: [ { actor: 'teamgreymass', permission: 'active' } ],
-        data: { voter: 'teamgreymass', proxy: 'greymassvote', producers: [] }
-      }
-    ],
-    context_free_actions: [],
-    transaction_extensions: [],
-    expiration: '2020-01-08T18:44:57.000',
-    ref_block_num: 1423,
-    ref_block_prefix: 4278398322,
-    max_cpu_usage_ms: 0,
-    max_net_usage_words: 0,
-    delay_sec: 0
-  },
-  serializedTransaction: Uint8Array [
-    41,  35,  22,  94, 143,  5, 114,  45,   3, 255,   0,   0,
-     0,   0,   1,   0,   0,  0,   0,   0, 234,  48,  85, 112,
-    21, 210, 137, 222, 170, 50, 221,   1, 128, 177, 145,  94,
-    93,  38, 141, 202,   0,  0,   0,   0, 168, 237,  50,  50,
-    17, 128, 177, 145,  94, 93,  38, 141, 202, 160,  50, 221,
-    24,  27, 233, 213, 101,  0,   0
-  ]
 }
 ```
 
